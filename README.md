@@ -48,6 +48,7 @@ Sky-Gauge is a modern weather web app that fetches real-time weather data, 10-da
 - HTML5, CSS3, JavaScript (ES6+)
 - [OpenWeatherMap API](https://openweathermap.org/)
 - [FontAwesome](https://fontawesome.com/) (for icons)
+- [Google Fonts]((https://fonts.google.com/) (for fonts like "Baloo Bhai 2", sans-serif)
 
 ## Project Structure
 
@@ -73,8 +74,8 @@ Contributions are welcome! Please open issues and submit pull requests for impro
 
 ## Contact
 
-- GitHub: [MuhammadGhyasAli](https://github.com/MuhammadGhyasAli)
-- LinkedIn: [Syed Ghyas Ali](https://www.linkedin.com/in/syed-ghyas-ali/)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/MuhammadGhyasAli)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/syed-ghyas-ali/)
 
 ---
 
