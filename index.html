@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Gauge - Weather App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@400..800&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Theme Loading Overlay -->
+    <div class="theme-loading-overlay" id="themeLoadingOverlay" role="dialog" aria-label="Theme switching">
+        <span class="loader" aria-hidden="true"></span>
+        <div class="theme-loading-text">Switching Theme...</div>
+    </div>
+
+    <!-- Header Section -->
+    <header>
+        <nav class="navbar header" role="navigation" aria-label="Main navigation">
+            <!-- Logo and App Title -->
+            <div class="logoArea">
+                <div class="logo" aria-hidden="true">
+                    <img class="logoImg" src="logo.png" alt="Sky Gauge Logo">
+                </div>
+                <h1>Sky Gauge</h1>
+            </div>
+            
+            <!-- Animated Description Text -->
+            <div class="wrapperText">
+                <div class="typingdemo" aria-label="Weather app description">
+                    Real-time forecasts, alerts, radar, and personalized weather updates daily.
+                </div>
+            </div>
+            
+            <!-- Search Input and Controls -->
+            <div class="weatherInput">
+                <input 
+                    type="text" 
+                    name="city" 
+                    id="city-input" 
+                    placeholder="Enter the name of city"
+                    aria-label="City name input"
+                    autocomplete="off"
+                >
+                <button type="button" id="searchBtn" aria-label="Search weather">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <span>Search</span>
+                </button>
+                <button type="button" id="toggleBtn" name="theme-change" aria-label="Toggle theme">
+                    <i class="fa fa-sun fa-1.5x" aria-hidden="true"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main role="main">
+        <!-- Main Weather Data Container -->
+        <div class="weather-data">
+            <!-- Left Side - Current Weather and 10-Day Forecast -->
+            <section class="weather-left" aria-label="Current weather and forecast">
+                <!-- Current Weather Card -->
+                <div class="card">
+                    <div class="current-weather">
+                        <div class="details">
+                            <p>Now</p>
+                            <h2 id="current-temp" aria-label="Current temperature">--°C</h2>
+                            <p id="current-condition" aria-label="Current weather condition">--</p>
+                        </div>
+                        <div class="weather-icon">
+                            <img id="current-icon" src="https://openweathermap.org/img/wn/04d@2x.png" alt="Current weather icon">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="card-footer">
+                        <p id="current-date"><i class="fa fa-calendar" aria-hidden="true"></i> --</p>
+                        <p id="current-location"><i class="fa fa-map-marker" aria-hidden="true"></i> --</p>
+                    </div>
+                </div>
+
+                <!-- 10-Day Forecast Card -->
+                <div class="card">
+                    <h2>10 Days Forecast</h2>
+                    <div class="forecast-container" id="forecast-container" role="list" aria-label="10 day weather forecast">
+                        <!-- 10-day forecast items will be populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Side - Weather Highlights and Hourly Forecast -->
+            <section class="weather-right" aria-label="Weather highlights and hourly forecast">
+                <h2>Today's highlights</h2>
+                
+                <!-- Weather Highlights Grid -->
+                <div class="highlights">
+                    <!-- Air Quality Card -->
+                    <div class="card">
+                        <div class="card-head">
+                            <p>Air Quality</p>
+                            <p class="air-index aqi-1" id="aqi-status">Good</p>
+                        </div>
+                        <div class="air-indices">
+                            <i class="fa fa-wind fa-2x" aria-hidden="true"></i>
+                            <div class="item">
+                                <p>PM2.5</p>
+                                <h3 id="pm25">--</h3>
+                            </div>
+                            <div class="item">
+                                <p>PM10</p>
+                                <h3 id="pm10">--</h3>
+                            </div>
+                            <div class="item">
+                                <p>SO2</p>
+                                <h3 id="so2">--</h3>
+                            </div>
+                            <div class="item">
+                                <p>CO</p>
+                                <h3 id="co">--</h3>
+                            </div>
+                            <div class="item">
+                                <p>NO</p>
+                                <h3 id="no">--</h3>
+                            </div>
+                            <div class="item">
+                                <p>NO2</p>
+                                <h3 id="no2">--</h3>
+                            </div>
+                            <div class="item">
+                                <p>NH3</p>
+                                <h3 id="nh3">--</h3>
+                            </div>
+                            <div class="item">
+                                <p>O3</p>
+                                <h3 id="o3">--</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sunrise and Sunset Card -->
+                    <div class="card">
+                        <div class="card-head">
+                            <p>Sunrise and Sunset</p>
+                        </div>
+                        <div class="sunrise-sunset">
+                            <div class="item">
+                                <div class="icon">
+                                    <i class="fas fa-sun" style="color: #ff6b35;" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <p>Sunrise</p>
+                                    <h3 id="sunrise-time">--</h3>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="icon">
+                                    <i class="fas fa-moon" style="color: #ffd700;" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <p>Sunset</p>
+                                    <h3 id="sunset-time">--</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Humidity Card -->
+                    <div class="card">
+                        <div class="card-head">
+                            <p>Humidity</p>
+                        </div>
+                        <div class="card-item">
+                            <i class="fa fa-droplet fa-2x" aria-hidden="true"></i>
+                            <h3 id="humidityVal">--%</h3>
+                        </div>
+                    </div>
+
+                    <!-- Pressure Card -->
+                    <div class="card">
+                        <div class="card-head">
+                            <p>Pressure</p>
+                        </div>
+                        <div class="card-item">
+                            <i class="fa fa-compass fa-2x" aria-hidden="true"></i>
+                            <h3 id="pressureVal">--hPa</h3>
+                        </div>
+                    </div>
+
+                    <!-- Visibility Card -->
+                    <div class="card">
+                        <div class="card-head">
+                            <p>Visibility</p>
+                        </div>
+                        <div class="card-item">
+                            <i class="fa fa-eye fa-2x" aria-hidden="true"></i>
+                            <h3 id="visibilityVal">--km</h3>
+                        </div>
+                    </div>
+
+                    <!-- Wind Speed Card -->
+                    <div class="card">
+                        <div class="card-head">
+                            <p>Wind Speed</p>
+                        </div>
+                        <div class="card-item">
+                            <i class="fa fa-location-arrow fa-2x" aria-hidden="true"></i>
+                            <h3 id="windVal">--m/s</h3>
+                        </div>
+                    </div>
+
+                    <!-- Feels Like Temperature Card -->
+                    <div class="card">
+                        <div class="card-head">
+                            <p>Feels Like</p>
+                        </div>
+                        <div class="card-item">
+                            <i class="fa fa-thermometer-half fa-2x" aria-hidden="true"></i>
+                            <h3 id="feelsVal">--°C</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hourly Forecast Section -->
+                <div class="hourly-forecast-container">
+                    <h2>Today At</h2>
+                    <div class="hourly-forecast" id="hourly-container" role="list" aria-label="Hourly weather forecast">
+                        <!-- All 24 hours will be populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo" aria-hidden="true">
+                    <img class="logoImg" src="logo.png" alt="Sky Gauge Logo">
+                </div>
+                <h3>Sky Gauge</h3>
+            </div>
+            <div class="footer-social">
+                <a href="https://github.com/MuhammadGhyasAli" class="social-link" aria-label="GitHub profile">
+                    <i class="fab fa-github" aria-hidden="true"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/syed-ghyas-ali/" class="social-link" aria-label="LinkedIn profile">
+                    <i class="fab fa-linkedin" aria-hidden="true"></i>
+                </a>
+                <a href="#" class="social-link" aria-label="Back to top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Sky Gauge. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
