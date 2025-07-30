@@ -20,7 +20,7 @@ Sky-Gauge is a modern weather web app that fetches real-time weather data, 10-da
 
 ## Preview
    Open link 
-      http://skygauge-system.vercel.app/
+      https://skyguage-sg.vercel.app/
 ## Installation
 
 1. **Clone the repository:**
