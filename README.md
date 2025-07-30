@@ -18,6 +18,9 @@ Sky-Gauge is a modern weather web app that fetches real-time weather data, 10-da
 
 ![Sky-Gauge Screenshot](screenshot.png)
 
+## Preview
+   Open link 
+      http://skygauge-system.vercel.app/
 ## Installation
 
 1. **Clone the repository:**
