@@ -565,3 +565,4 @@ document.addEventListener("DOMContentLoaded", () => {
     hideSearchLoading()
   })
 })
+  document.getElementById("year").textContent = new Date().getFullYear();
